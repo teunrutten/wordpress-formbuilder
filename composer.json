@@ -1,0 +1,12 @@
+{
+    "name": "formbuilder/lib",
+    "autoload" : {
+      "classmap": [
+        "lib/"
+
+      ],
+      "psr-4" : {
+        "lib\\" : "lib/"
+      }
+    }
+}
