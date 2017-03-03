@@ -13,6 +13,6 @@ Download, clone or add as a submodule
 
 `formbuilder_after_opening_form` After opening `<form>` tag
 
-`formbuilder_before_closing_form` Before closing `<form>` tag
+`formbuilder_before_closing_form` Before closing `</form>` tag
 
-`formbuilder_after_closing_form` After closing `<form>` tag
+`formbuilder_after_closing_form` After closing `</form>` tag
