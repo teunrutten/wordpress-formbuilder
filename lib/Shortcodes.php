@@ -31,6 +31,8 @@ class Shortcodes {
 
     $html = apply_filters( 'formbuilder_before_opening_form', '' );
     $html .= '<form class="' . $form['settings']['form_class'] . '" ' . ( ! empty( $form['settings']['action'] ) ? 'action="' . $form['settings']['action'] . '"' : '' ) .  '>';
+    $html .= $this->inputHidden( array( 'name' => 'id', 'value' => $atts['id'] ) );
+    $html .= $this->inputHidden( array( 'name' => 'form_title', 'value' => get_the_title( $atts['id'] ) ) );
     $html .= apply_filters( 'formbuilder_after_opening_form', '' );
     $html .= do_shortcode( $form['content'] );
     $html .= apply_filters( 'formbuilder_before_closing_form', '' );
@@ -40,10 +42,16 @@ class Shortcodes {
     return $html;
   }
 
+  /**
+   * Hidden input
+   */
   public function inputHidden( $atts, $content = '' ) {
     return '<input type="hidden" name="' . $atts['name'] . '" value="' . $atts['value'] . '">';
   }
 
+  /**
+   * Input
+   */
   public function input( $atts, $content = '' ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
 
@@ -68,9 +76,14 @@ class Shortcodes {
     return $html;
   }
 
+  /**
+   * Radio
+   */
   public function radio ( $atts, $content ) {
-    $html = $this->getOpeningInputContainer();
+    $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
+    $additionalClass = isset( $atts['float'] ) ? '' : 'c-input__radio-group';
+    $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
       return;
@@ -105,7 +118,7 @@ class Shortcodes {
    * Returns a checkbox
    */
   public function checkbox ( $atts, $content ) {
-    $html = $this->getOpeningInputContainer( '' ) . '= TODO' . $this->getClosingInputContainer();
+    $html = $this->getOpeningInputContainer( '' ) . ' Checkbox = TODO' . $this->getClosingInputContainer();
     return $html;
   }
 
@@ -186,8 +199,8 @@ class Shortcodes {
       </div>';
   }
 
-  private function getOpeningInputContainer ( $size = false ) {
-    return '<div class="c-input ' . ( $size ? 'u-' . $size . '@m' : '' ) . '">';
+  private function getOpeningInputContainer ( $size = false , $additionalClass = '' ) {
+    return '<div class="c-input ' . ( $size ? 'u-' . $size . '@m' : '' ) . ' ' . $additionalClass . '">';
   }
 
   private function getClosingInputContainer () {
