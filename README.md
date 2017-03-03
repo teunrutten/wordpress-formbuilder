@@ -7,7 +7,7 @@ A highly opionated formbuilder plugin using shortcodes.
 
 Download, clone or add as a submodule
 
-##Available filters
+##Available action hooks
 
 `formbuilder_before_opening_form` Before opening `<form>` tag
 
