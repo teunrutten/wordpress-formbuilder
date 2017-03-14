@@ -30,8 +30,8 @@ class Shortcodes {
     $form = get_post_meta( $atts['id'], '_form', true );
 
     $html = apply_filters( 'formbuilder_before_opening_form', '' );
-    $html .= '<form class="' . $form['settings']['form_class'] . '" ' . ( ! empty( $form['settings']['action'] ) ? 'action="' . $form['settings']['action'] . '"' : '' ) .  '>';
-    $html .= $this->inputHidden( array( 'name' => 'id', 'value' => $atts['id'] ) );
+    $html .= '<form method="post" class="' . $form['settings']['form_class'] . '" ' . ( ! empty( $form['settings']['action'] ) ? 'action="' . $form['settings']['action'] . '"' : '' ) .  '>';
+    $html .= $this->inputHidden( array( 'name' => 'form_id', 'value' => $atts['id'] ) );
     $html .= $this->inputHidden( array( 'name' => 'form_title', 'value' => get_the_title( $atts['id'] ) ) );
     $html .= apply_filters( 'formbuilder_after_opening_form', '' );
     $html .= do_shortcode( $form['content'] );
@@ -184,7 +184,8 @@ class Shortcodes {
       'style' => $atts['style'],
       'additionalClass' => '',
       'content' => $atts['content'],
-      'size' => $atts['size']
+      'size' => $atts['size'],
+      'type' => 'submbit'
     ) );
     $html .= $this->getClosingInputContainer();
 

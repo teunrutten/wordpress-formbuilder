@@ -6,7 +6,7 @@ use Cuisine\Wrappers\Field;
   Field::text( 'form[settings][form_class]', 'Form class', array(
     'defaultValue' => $content['settings']['form_class']
   ) )->render();
-  Field::text( 'form[settings][action]', 'Form action', array(
+  Field::text( 'form[settings][action]', 'Form action (bedankt pagina url)', array(
     'defaultValue' => $content['settings']['action']
   ) )->render();
   ?>
