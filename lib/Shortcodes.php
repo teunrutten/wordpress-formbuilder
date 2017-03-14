@@ -182,7 +182,7 @@ class Shortcodes {
     $html = $this->getOpeningInputContainer( $width );
     $html .= Timber::compile( '/views/shared/loading-button.twig', array(
       'style' => $atts['style'],
-      'additionalClass' => 'js-loading-button',
+      'additionalClass' => '',
       'content' => $atts['content'],
       'size' => $atts['size']
     ) );
