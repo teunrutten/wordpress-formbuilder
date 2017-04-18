@@ -124,12 +124,9 @@ class Shortcodes {
     if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
 
     $id = sanitize_title( $atts['name'] );
-
     $html .= '<div class="c-checkbox">';
-    $html .= '<label for="' . $id . '">';
     $html .= '<input type="checkbox" name="' . $atts['name'] . '" value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
-    $html .= $atts['label'];
-    $html .= '</label>';
+    $html .= '<label class="c-checkbox__label" for="' . $id . '">' . $atts['label'] . '</label>';
     $html .= '</div>';
 
     $html .= $this->getClosingInputContainer();
