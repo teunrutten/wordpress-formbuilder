@@ -82,7 +82,7 @@ class Shortcodes {
   public function radio ( $atts, $content ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
-    $additionalClass = isset( $atts['float'] ) ? '' : 'c-input__radio-group';
+    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group';
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
@@ -118,7 +118,21 @@ class Shortcodes {
    * Returns a checkbox
    */
   public function checkbox ( $atts, $content ) {
-    $html = $this->getOpeningInputContainer( '' ) . ' Checkbox = TODO' . $this->getClosingInputContainer();
+    $width = isset( $atts['width'] ) ? $atts['width'] : false;
+    $html = $this->getOpeningInputContainer( $width, '' );
+
+    if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
+
+    $id = sanitize_title( $atts['name'] );
+
+    $html .= '<div class="c-checkbox">';
+    $html .= '<label for="' . $id . '">';
+    $html .= '<input type="checkbox" name="' . $atts['name'] . '" value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
+    $html .= $atts['label'];
+    $html .= '</label>';
+    $html .= '</div>';
+
+    $html .= $this->getClosingInputContainer();
     return $html;
   }
 
