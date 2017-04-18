@@ -1,0 +1,14 @@
+{
+  "name": "wordpress-formbuilder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Corjen/wordpress-formbuilder",
+  "author": "Corjen Moll <corjen@me.com>",
+  "license": "MIT",
+  "scripts": {
+    "release": "standard-version && git push --follow-tags && git push && git push --tags"
+  },
+  "dependencies": {
+    "standard-version": "^4.0.0"
+  }
+}
