@@ -22,6 +22,11 @@ class Admin {
       wp_enqueue_script( 'add-tag', FB_PLUGIN_URL . '/assets/add-tag.js', array( 'jquery' ) );
     } );
 
+    // Remove Yoast support
+    add_action( 'add_meta_boxes', function () {
+      remove_meta_box('wpseo_meta', 'form', 'normal');
+    }, 11 );
+
     add_action( 'save_post_form', function ( $post_id ) {
       if ( ! isset( $_POST['save_form_nonce'] ) || ! wp_verify_nonce( $_POST['save_form_nonce'], 'save_form' ) ) {
         return $post_id;
