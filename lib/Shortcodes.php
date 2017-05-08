@@ -196,7 +196,7 @@ class Shortcodes {
       'additionalClass' => '',
       'content' => $atts['content'],
       'size' => $atts['size'],
-      'type' => 'submbit'
+      'type' => 'submit'
     ) );
     $html .= $this->getClosingInputContainer();
 
