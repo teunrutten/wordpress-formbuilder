@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.1...v1.1.2) (2017-05-08)
+
+
+### Bug Fixes
+
+* Fix typo ([e52c067](https://github.com/Corjen/wordpress-formbuilder/commit/e52c067))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.0...v1.1.1) (2017-04-18)
 
