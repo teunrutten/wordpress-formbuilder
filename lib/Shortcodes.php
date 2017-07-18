@@ -54,7 +54,6 @@ class Shortcodes {
    */
   public function input( $atts, $content = '' ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
-
     $html = $this->getOpeningInputContainer( $width );
     $html .= '<input class="c-input__input" ';
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
@@ -62,6 +61,7 @@ class Shortcodes {
     if ( isset( $atts['placeholder'] ) ) { $html .= 'placeholder="' . $atts['placeholder'] . '" '; }
     if ( isset( $atts['pattern'] ) ) { $html .= 'pattern="' . urldecode($atts['pattern']) . '" '; }
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
+    if ( isset( $atts['value'] ) ) { $html .= 'value="' . $atts['value'] . '" '; }
     $html .= '/>';
 
     if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
@@ -82,7 +82,7 @@ class Shortcodes {
   public function radio ( $atts, $content ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
-    $additionalClass = isset( $atts['float'] ) ? '' : 'c-input__radio-group';
+    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group';
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
@@ -118,7 +118,18 @@ class Shortcodes {
    * Returns a checkbox
    */
   public function checkbox ( $atts, $content ) {
-    $html = $this->getOpeningInputContainer( '' ) . ' Checkbox = TODO' . $this->getClosingInputContainer();
+    $width = isset( $atts['width'] ) ? $atts['width'] : false;
+    $html = $this->getOpeningInputContainer( $width, '' );
+
+    if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
+
+    $id = sanitize_title( $atts['name'] );
+    $html .= '<div class="c-checkbox">';
+    $html .= '<input type="checkbox" name="' . $atts['name'] . '" value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
+    $html .= '<label class="c-checkbox__label" for="' . $id . '">' . $atts['label'] . '</label>';
+    $html .= '</div>';
+
+    $html .= $this->getClosingInputContainer();
     return $html;
   }
 
@@ -185,7 +196,7 @@ class Shortcodes {
       'additionalClass' => '',
       'content' => $atts['content'],
       'size' => $atts['size'],
-      'type' => 'submbit'
+      'type' => 'submit'
     ) );
     $html .= $this->getClosingInputContainer();
 

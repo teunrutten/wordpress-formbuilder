@@ -18,7 +18,8 @@
       'textarea_name' => 'form[content]',
       'wpautop' => true,
       'media_buttons' => false,
-      // 'teeny' => true
+      'editor_css' => '',
+      'textarea_rows' => 40
     ) );
     ?>
 </div>
