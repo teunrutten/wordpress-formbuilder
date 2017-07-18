@@ -60,7 +60,7 @@ class Shortcodes {
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
     if ( isset( $atts['placeholder'] ) ) { $html .= 'placeholder="' . $atts['placeholder'] . '" '; }
-    if ( isset( $atts['pattern'] ) ) { $html .= 'pattern="' . $atts['name'] . '" '; }
+    if ( isset( $atts['pattern'] ) ) { $html .= 'pattern="' . urldecode($atts['pattern']) . '" '; }
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
     $html .= '/>';
 
