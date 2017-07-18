@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.3...v1.1.4) (2017-07-18)
+
+
+### Bug Fixes
+
+* Fix pattern attribute ([c9037af](https://github.com/Corjen/wordpress-formbuilder/commit/c9037af))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.2...v1.1.3) (2017-06-20)
 
