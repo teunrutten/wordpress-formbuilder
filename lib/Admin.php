@@ -50,6 +50,11 @@ class Admin {
       'settings' => array(
         'form_class' => 'c-form u-flex u-flex-sb',
         'action' => '',
+      ),
+      'autoresponder' => array(
+        'enabled' => 'true',
+        'subject' => '',
+        'content' => ''
       )
     );
 
@@ -64,11 +69,13 @@ class Admin {
     <h2 class="nav-tab-wrapper current">
      <a class="nav-tab nav-tab-active" href="javascript:;">Formulier</a>
      <a class="nav-tab" href="javascript:;">Instellingen</a>
+     <a class="nav-tab" href="javascript:;">Autoresponder</a>
     </h2>
       <?php
       echo wp_nonce_field( 'save_form', 'save_form_nonce' );
       include ( FB_PLUGIN_DIR . '/views/form.php' );
       include ( FB_PLUGIN_DIR . '/views/settings.php' );
+      include ( FB_PLUGIN_DIR . '/views/autoresponder.php' );
       ?>
     <?php if ( isset( $_GET['post'] ) ): ?>
       <div class="shortcode-wrapper">
