@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.4...v1.2.0) (2017-07-26)
+
+
+### Features
+
+* Add autoresponder tab ([f3c717f](https://github.com/Corjen/wordpress-formbuilder/commit/f3c717f))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/Corjen/wordpress-formbuilder/compare/v1.1.3...v1.1.4) (2017-07-18)
 
