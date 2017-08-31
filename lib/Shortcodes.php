@@ -28,9 +28,9 @@ class Shortcodes {
 
     // Get form
     $form = get_post_meta( $atts['id'], '_form', true );
-
+    $enctype = $form['settings']['enctype'] ?? '';
     $html = apply_filters( 'formbuilder_before_opening_form', '' );
-    $html .= '<form method="post" class="' . $form['settings']['form_class'] . '" ' . ( ! empty( $form['settings']['action'] ) ? 'action="' . $form['settings']['action'] . '"' : '' ) .  '>';
+    $html .= '<form method="post" enctype="' . $enctype . '"  class="' . $form['settings']['form_class'] . '" ' . ( ! empty( $form['settings']['action'] ) ? 'action="' . $form['settings']['action'] . '"' : '' ) .  '>';
     $html .= $this->inputHidden( array( 'name' => 'form_id', 'value' => $atts['id'] ) );
     $html .= $this->inputHidden( array( 'name' => 'form_title', 'value' => get_the_title( $atts['id'] ) ) );
     $html .= apply_filters( 'formbuilder_after_opening_form', '' );

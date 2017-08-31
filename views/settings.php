@@ -9,5 +9,8 @@ use Cuisine\Wrappers\Field;
   Field::text( 'form[settings][action]', 'Form action (bedankt pagina url)', array(
     'defaultValue' => $content['settings']['action']
   ) )->render();
+  Field::text( 'form[settings][enctype]', 'Form enctype', array(
+    'defaultValue' => $content['settings']['enctype'] ?? ''
+  ) )->render();
   ?>
 </div>
