@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/Corjen/wordpress-formbuilder/compare/v1.2.2...v1.2.3) (2017-10-11)
+
+
+### Bug Fixes
+
+* Default enabled to false ([80c4015](https://github.com/Corjen/wordpress-formbuilder/commit/80c4015))
+* Don't wrap input hidden ([64d9eb5](https://github.com/Corjen/wordpress-formbuilder/commit/64d9eb5))
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/Corjen/wordpress-formbuilder/compare/v1.2.1...v1.2.2) (2017-08-31)
 
