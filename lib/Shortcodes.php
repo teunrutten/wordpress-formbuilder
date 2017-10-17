@@ -138,7 +138,7 @@ class Shortcodes {
   public function select ( $atts, $content ) {
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) return;
 
-    $html = $this->getOpeningInputContainer();
+    $html = $this->getOpeningInputContainer( $atts['width'] ?? false );
     $values = explode( ',', $atts['values'] );
     $labels = explode( ',', $atts['labels'] );
     $html .= isset( $atts['label'] ) ? '<label class="c-select-label">' . $atts['label']  .'</label>' : '';
