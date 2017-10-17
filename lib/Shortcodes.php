@@ -54,7 +54,10 @@ class Shortcodes {
    */
   public function input( $atts, $content = '' ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
-    $html = $this->getOpeningInputContainer( $width );
+    $html = '';
+    if( $atts['type'] !== 'hidden' ) {
+      $html .= $this->getOpeningInputContainer( $width );
+    }
     $html .= '<input class="c-input__input" ';
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
@@ -71,8 +74,9 @@ class Shortcodes {
     if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
       $html .= $this->getInputValidationStatus();
     }
-
-    $html .= $this->getClosingInputContainer();
+    if( $atts['type'] !== 'hidden' ) {
+      $html .= $this->getClosingInputContainer();
+    }
     return $html;
   }
 

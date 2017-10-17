@@ -4,7 +4,7 @@ use Cuisine\Wrappers\Field;
 <div class="inside nav-container hidden">
   <?php
   Field::checkbox( 'form[autoresponder][enabled]', 'Ingeschakeld', array(
-    'defaultValue' => $content['autoresponder']['enabled'] ?? 'true'
+    'defaultValue' => $content['autoresponder']['enabled'] ?? 'false'
   ) )->render();
   Field::text( 'form[autoresponder][subject]', '', array(
     'defaultValue' => $content['autoresponder']['subject'] ?? '',
