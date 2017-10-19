@@ -125,10 +125,13 @@ class Shortcodes {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $html = $this->getOpeningInputContainer( $width, '' );
     if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
-
+    $required  = '';
+    if( isset( $atts['required'] ) ) {
+      $required = 'required';
+    }
     $id = sanitize_title( $atts['name'] );
     $html .= '<div class="c-checkbox">';
-    $html .= '<input type="checkbox" name="' . $atts['name'] . '" required="' . $atts['required'] .  '" value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
+    $html .= '<input type="checkbox" name="' . $atts['name'] . '" ' . $required . '  value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
     $html .= '<label class="c-checkbox__label" for="' . $id . '">' . $atts['label'] . '</label>';
     $html .= '</div>';
 
