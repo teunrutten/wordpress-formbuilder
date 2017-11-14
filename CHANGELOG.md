@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/Corjen/wordpress-formbuilder/compare/v1.2.2...v1.2.3) (2017-11-14)
+
+
+### Bug Fixes
+
+* Add maxlength to input & textarea ([799a837](https://github.com/Corjen/wordpress-formbuilder/commit/799a837))
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/Corjen/wordpress-formbuilder/compare/v1.2.1...v1.2.2) (2017-08-31)
 
