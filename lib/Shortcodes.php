@@ -54,7 +54,10 @@ class Shortcodes {
    */
   public function input( $atts, $content = '' ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
-    $html = $this->getOpeningInputContainer( $width );
+    $html = '';
+    if( $atts['type'] !== 'hidden' ) {
+      $html .= $this->getOpeningInputContainer( $width );
+    }
     $html .= '<input class="c-input__input" ';
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
@@ -72,8 +75,9 @@ class Shortcodes {
     if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
       $html .= $this->getInputValidationStatus();
     }
-
-    $html .= $this->getClosingInputContainer();
+    if( $atts['type'] !== 'hidden' ) {
+      $html .= $this->getClosingInputContainer();
+    }
     return $html;
   }
 
@@ -122,10 +126,13 @@ class Shortcodes {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $html = $this->getOpeningInputContainer( $width, '' );
     if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
-
+    $required  = '';
+    if( isset( $atts['required'] ) ) {
+      $required = 'required';
+    }
     $id = sanitize_title( $atts['name'] );
     $html .= '<div class="c-checkbox">';
-    $html .= '<input type="checkbox" name="' . $atts['name'] . '" required="' . $atts['required'] .  '" value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
+    $html .= '<input type="checkbox" name="' . $atts['name'] . '" ' . $required . '  value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
     $html .= '<label class="c-checkbox__label" for="' . $id . '">' . $atts['label'] . '</label>';
     $html .= '</div>';
 
@@ -139,7 +146,7 @@ class Shortcodes {
   public function select ( $atts, $content ) {
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) return;
 
-    $html = $this->getOpeningInputContainer();
+    $html = $this->getOpeningInputContainer( $atts['width'] ?? false );
     $values = explode( ',', $atts['values'] );
     $labels = explode( ',', $atts['labels'] );
     $html .= isset( $atts['label'] ) ? '<label class="c-select-label">' . $atts['label']  .'</label>' : '';
