@@ -62,6 +62,7 @@ class Shortcodes {
     if ( isset( $atts['pattern'] ) ) { $html .= 'pattern="' . urldecode($atts['pattern']) . '" '; }
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
     if ( isset( $atts['value'] ) ) { $html .= 'value="' . $atts['value'] . '" '; }
+    if ( isset( $atts['maxlength'] ) ) { $html .= 'maxlength="' . $atts['maxlength'] . '" '; }
     $html .= '/>';
 
     if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
@@ -163,6 +164,7 @@ class Shortcodes {
     $html .= '<textarea class="c-input__input" ';
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
     if ( isset( $atts['placeholder'] ) ) { $html .= 'placeholder="' . $atts['placeholder'] . '" '; }
+    if ( isset( $atts['maxlength'] ) ) { $html .= 'maxlength="' . $atts['maxlength'] . '" '; }
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
     $html .= '></textarea>';
 
