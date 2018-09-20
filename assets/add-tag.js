@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
     const type = $(this).data('type')
     console.log(type)
 
-    if (type === 'col') { addToEditor('[col]   [/col]') }
+    if (type === 'col') { addToEditor('[col][/col]') }
     if (type === 'hidden') { addToEditor('[input_hidden name="" value=""]') }
     if (type === 'text' ||
         type === 'url' ||
@@ -12,15 +12,15 @@ jQuery(document).ready(function ($) {
         type === 'number' ||
         type === 'email'
       ) { addToEditor(getRegularInputShortcode(type)) }
-    if (type === 'textarea') { addToEditor('[textarea name="" value="" placeholder="" autocomplete="" pattern="" width="1/2" required="required"]') }
-    if (type === 'select') { addToEditor('[select name="" values="" labels="" label="" placeholder="" pattern="" width="1/2" required="required"]') }
-    if (type === 'checkbox') { addToEditor('[checkbox name="" value="" label="" float required="required"]') }
-    if (type === 'radio') { addToEditor('[radio name="" values="" labels="" float]') }
-    if (type === 'submit') { addToEditor('[submit style="primary" content="Verzenden" size="medium" width="1/2"]') }
+    if (type === 'textarea') { addToEditor('[textarea name="" label="" width="1/2" required="required" error=""]') }
+    if (type === 'select') { addToEditor('[select name="" values="" labels="" label="" width="1/2" required="required" error=""]') }
+    if (type === 'checkbox') { addToEditor('[checkbox name="" value="" label="" float="float" required="required" error=""]') }
+    if (type === 'radio') { addToEditor('[radio name="" values="" labels="" float="float"]') }
+    if (type === 'submit') { addToEditor('[submit style="primary" content="Verzenden" width="1/1"]') }
   })
 
   function getRegularInputShortcode (type) {
-    return '[input type="' + type + '" name="" value="" label="" placeholder="" autocomplete="" pattern="" width="1/2" required="required"]'
+    return '[input type="' + type + '" name="" label="" placeholder="" width="1/2" required="required" error=""]'
   }
 
   function addToEditor (content) {

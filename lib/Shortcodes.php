@@ -55,9 +55,15 @@ class Shortcodes {
   public function input( $atts, $content = '' ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $html = '';
+
     if( $atts['type'] !== 'hidden' ) {
       $html .= $this->getOpeningInputContainer( $width );
     }
+
+    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
+      $html .= '<label class="c-input__label">' . $atts['label'] . '</label>';
+    }
+
     $html .= '<input class="c-input__input" ';
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
@@ -68,16 +74,18 @@ class Shortcodes {
     if ( isset( $atts['maxlength'] ) ) { $html .= 'maxlength="' . $atts['maxlength'] . '" '; }
     $html .= '/>';
 
-    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
-      $html .= '<label class="c-input__label">' . $atts['label'] . '</label>';
+    if ( isset( $atts['error'] ) ) { 
+      $html .= '<div class="c-input__error">' . $atts['error'] . '</div>'; 
     }
 
-    if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
-      $html .= $this->getInputValidationStatus();
-    }
+    // if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
+    //   $html .= $this->getInputValidationStatus();
+    // }
+
     if( $atts['type'] !== 'hidden' ) {
       $html .= $this->getClosingInputContainer();
     }
+
     return $html;
   }
 
@@ -88,6 +96,7 @@ class Shortcodes {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
     $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group';
+
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
@@ -99,15 +108,19 @@ class Shortcodes {
 
     foreach ( $values as $key => $value ) {
       $id = 'hash-' . uniqid() . '-' . $key;
+
       if ( $float ) {
         $html .= '<div class="c-radio">';
       } else {
         $html .= '<span class="c-radio">';
       }
+
       $html .= '<input type="radio" name="' . $atts['name'] . '" value="' . $value . '" id="' . $id . '" class="c-radio__element" ' . ( $key === 0 ? 'checked' : '' )  . '/>';
+      
       if ( $labels[$key] ) {
         $html .= '<label class="c-radio__label" for="' . $id . '">' . $labels[$key] . '</label>';
       }
+
       if ( $float ) {
         $html .= '</div>';
       } else {
@@ -124,16 +137,28 @@ class Shortcodes {
    */
   public function checkbox ( $atts, $content ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
-    $html = $this->getOpeningInputContainer( $width, '' );
+    $float = isset( $atts['float'] );
+    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__checkbox-group';
+
+    $html = $this->getOpeningInputContainer( $width, $additionalClass );
+
     if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
+
     $required  = '';
     if( isset( $atts['required'] ) ) {
       $required = 'required';
     }
+
     $id = sanitize_title( $atts['name'] );
+    
     $html .= '<div class="c-checkbox">';
     $html .= '<input type="checkbox" name="' . $atts['name'] . '" ' . $required . '  value="' . $atts['value'] . '" id="' . $id . '" class="c-checkbox__element" ' . ( isset( $atts['checked'] ) && $atts['checked'] === 'checked' ? 'checked' : '' )  . '/>';
     $html .= '<label class="c-checkbox__label" for="' . $id . '">' . $atts['label'] . '</label>';
+
+    if ( isset( $atts['error'] ) ) { 
+      $html .= '<div class="c-checkbox__error">' . $atts['error'] . '</div>'; 
+    }
+
     $html .= '</div>';
 
     $html .= $this->getClosingInputContainer();
@@ -149,18 +174,31 @@ class Shortcodes {
     $html = $this->getOpeningInputContainer( $atts['width'] ?? false );
     $values = explode( ',', $atts['values'] );
     $labels = explode( ',', $atts['labels'] );
-    $html .= isset( $atts['label'] ) ? '<label class="c-select-label">' . $atts['label']  .'</label>' : '';
-    $html .= '<select name="' . $atts['name'] . '" ' . ( isset( $atts['required'] ) ? 'required': '' ) . '>';
+
+    $html .= isset( $atts['label'] ) ? '<label class="c-select__label">' . $atts['label']  .'</label>' : '';
+
+    $html .= '<select class="c-select" name="' . $atts['name'] . '" ' . ( isset( $atts['required'] ) ? 'required': '' ) . '>';
     foreach ( $values as $key => $value ) {
-      $html .= '<option ' . ( $value !== '#' ? 'value="' . $value . '"' : '' ) . '">';
+      if ( isset($atts['required']) ) {
+        $option_value = ( $value !== '#' ) ? 'value="' . $value . '"' : 'value="" disabled selected';
+      } else {
+        $option_value = ( $value !== '#' ) ? 'value="' . $value . '"' : 'disabled selected';
+      }
+    
+      $html .= '<option '.$option_value.'>';
       $html .= $labels[$key];
       $html .= '</option>';
     }
     $html .= '</select>';
 
+    if ( isset( $atts['error'] ) ) { 
+      $html .= '<div class="c-select__error">' . $atts['error'] . '</div>'; 
+    }
+
     $html .= $this->getClosingInputContainer();
     return $html;
   }
+
   /**
    * Textarea
    */
@@ -168,25 +206,29 @@ class Shortcodes {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $html = $this->getOpeningInputContainer( $width );
 
-    $html .= '<textarea class="c-input__input" ';
+    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
+      $html .= '<label class="c-input__label c-textarea__label">' . $atts['label'] . '</label>';
+    }
+
+    $html .= '<textarea class="c-input__input c-textarea" ';
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
     if ( isset( $atts['placeholder'] ) ) { $html .= 'placeholder="' . $atts['placeholder'] . '" '; }
     if ( isset( $atts['maxlength'] ) ) { $html .= 'maxlength="' . $atts['maxlength'] . '" '; }
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
     $html .= '></textarea>';
 
-    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
-      $html .= '<label class="c-input__label">' . $atts['label'] . '</label>';
+    if ( isset( $atts['error'] ) ) { 
+      $html .= '<div class="c-input__error c-textarea__error">' . $atts['error'] . '</div>'; 
     }
 
-    if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
-      $html .= $this->getInputValidationStatus();
-    }
-
+    // if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
+    //   $html .= $this->getInputValidationStatus();
+    // }
 
     $html .= $this->getClosingInputContainer();
     return $html;
   }
+
   public function col ( $atts, $content ) {
     $html = '<div class="u-flex u-flex-sb u-1/2@m">';
     $html .= do_shortcode( $content );
@@ -196,27 +238,21 @@ class Shortcodes {
   }
 
   public function submit ($atts, $content = '') {
-    // return '<button type="submit" class="c-button c-button--' . $atts['style'] . '">' . $atts['conten'] . '</button>';
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
+
     $html = $this->getOpeningInputContainer( $width );
+
     $html .= Timber::compile( '/views/shared/loading-button.twig', array(
-      'style' => $atts['style'],
+      'style' => $atts['style'] ?? '',
       'additionalClass' => '',
-      'content' => $atts['content'],
-      'size' => $atts['size'],
+      'content' => $atts['content'] ?? '',
+      'size' => $atts['size'] ?? '',
       'type' => 'submit'
     ) );
+
     $html .= $this->getClosingInputContainer();
 
     return $html;
-  }
-
-  private function getInputStatus () {
-    return '
-      <div class="c-input__status">
-        <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--success "><use xlink:href="#check"></use></svg>
-        <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--error "><use xlink:href="#close"></use></svg>
-      </div>';
   }
 
   private function getOpeningInputContainer ( $size = false , $additionalClass = '' ) {
@@ -227,13 +263,13 @@ class Shortcodes {
     return '</div>';
   }
 
-  private function getInputValidationStatus () {
-    return '
-    <div class="c-input__status">
-      <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--success "><use xlink:href="#check"></use></svg>
-      <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--error "><use xlink:href="#close"></use></svg>
-    </div>';
-  }
+  // private function getInputValidationStatus () {
+  //   return '
+  //   <div class="c-input__status">
+  //     <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--success "><use xlink:href="#check"></use></svg>
+  //     <svg class="c-icon c-icon--small  c-input__status-icon c-input__status-icon--error "><use xlink:href="#close"></use></svg>
+  //   </div>';
+  // }
 
 
 }
