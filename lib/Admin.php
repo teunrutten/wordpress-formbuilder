@@ -48,7 +48,7 @@ class Admin {
     $defaults = array(
       'content' => '',
       'settings' => array(
-        'form_class' => 'c-form u-flex u-flex-sb',
+        'form_class' => 'c-form u-flex u-flex-sb js-form',
         'action' => '',
       ),
       'autoresponder' => array(
