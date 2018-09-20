@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
     if (type === 'select') { addToEditor('[select name="" values="" labels="" label="" width="1/2" required="required" error=""]') }
     if (type === 'checkbox') { addToEditor('[checkbox name="" value="" label="" float="float" required="required" error=""]') }
     if (type === 'radio') { addToEditor('[radio name="" values="" labels="" float="float"]') }
-    if (type === 'submit') { addToEditor('[submit style="primary" content="Verzenden" width="1/1"]') }
+    if (type === 'submit') { addToEditor('[submit style="primary js-loading-button" content="Verzenden" width="1/1"]') }
   })
 
   function getRegularInputShortcode (type) {
