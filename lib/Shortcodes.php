@@ -64,6 +64,12 @@ class Shortcodes {
       $html .= '<label class="c-input__label">' . $atts['label'] . '</label>';
     }
 
+    if ( isset( $atts['title'] ) && ! empty( $atts['title'] ) ) {
+      $html .= '<div class="c-input__container c-input__container--has-title">';
+    } else {
+      $html .= '<div class="c-input__container">';
+    }
+
     $html .= '<input class="c-input__input" ';
     if ( isset( $atts['type'] ) ) { $html .= 'type="' . $atts['type'] . '" '; }
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
@@ -74,9 +80,15 @@ class Shortcodes {
     if ( isset( $atts['maxlength'] ) ) { $html .= 'maxlength="' . $atts['maxlength'] . '" '; }
     $html .= '/>';
 
+    if ( isset( $atts['title'] ) && ! empty( $atts['title'] ) ) {
+      $html .= '<span class="c-input__title">' . $atts['title'] . '</span>';
+    }
+
     if ( isset( $atts['error'] ) ) { 
       $html .= '<div class="c-input__error">' . $atts['error'] . '</div>'; 
     }
+
+    $html .= '</div>'; // end .c-input__container
 
     // if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
     //   $html .= $this->getInputValidationStatus();
@@ -98,6 +110,10 @@ class Shortcodes {
     $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group';
 
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
+
+    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
+      $html .= '<label class="c-input__label c-radio__group-label">' . $atts['label'] . '</label>';
+    }
 
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
       return;
