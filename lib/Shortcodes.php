@@ -21,6 +21,7 @@ class Shortcodes {
     add_shortcode( 'textarea', array( $this, 'textarea' ) );
     add_shortcode( 'col', array( $this, 'col' ) );
     add_shortcode( 'submit', array( $this, 'submit' ) );
+    add_shortcode( 'file_upload', array( $this, 'file_upload' ) );
   }
 
   public function form ($atts, $content = '') {
@@ -266,6 +267,51 @@ class Shortcodes {
       'type' => 'submit'
     ) );
 
+    $html .= $this->getClosingInputContainer();
+
+    return $html;
+  }
+
+  /**
+   * File Upload
+   */
+  public function file_upload( $atts, $content = '' ) {
+    $width = isset( $atts['width'] ) ? $atts['width'] : false;
+    $placeholder = isset( $atts['placeholder'] ) ? $atts['placeholder'] : 'Upload bestand';
+    $button = isset( $atts['button'] ) ? $atts['button'] : 'Upload';
+    $html = '';
+
+    $html .= $this->getOpeningInputContainer( $width );
+    $html .= '<div class="c-upload js-upload-button">';
+
+    if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
+      $html .= '<label class="c-upload__label">' . $atts['label'] . '</label>';
+    }
+
+    $html .= '<div class="c-upload__container">';
+
+    $html .= '<div class="js-upload-content c-upload__content">' . $placeholder . '</div>';
+    $html .= '<div class="c-upload__button">' . $button . '</div>';
+
+    $html .= '<input class="c-upload__input js-upload-input" type="file" accept=".doc,.docx,.pdf" ';
+    if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
+    if ( isset( $atts['required'] ) ) { $html .= 'required '; }
+    $html .= '/>';
+
+    $html .= 
+    '<div class="c-upload__eraser js-upload-eraser">
+        <svg class="c-icon c-icon--medium c-upload__icon">
+          <use href="#close" xlink:href="#close"></use>
+      </svg>
+    </div>';
+
+    $html .= '</div>'; // end .c-upload__container
+
+    if ( isset( $atts['error'] ) ) { 
+      $html .= '<div class="c-upload__error">' . $atts['error'] . '</div>'; 
+    }
+
+    $html .= '</div>'; // end .c-upload
     $html .= $this->getClosingInputContainer();
 
     return $html;

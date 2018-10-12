@@ -12,6 +12,7 @@
     <a class="js-add-form-tag button" data-type="checkbox">Checkbox</a>
     <a class="js-add-form-tag button" data-type="radio">Radio</a>
     <a class="js-add-form-tag button" data-type="submit">Submit</a>
+    <a class="js-add-form-tag button" data-type="upload">Upload</a>
   </div>
   <?php
     wp_editor( $content['content'], 'form_editor', array(
