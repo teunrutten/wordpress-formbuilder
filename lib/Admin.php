@@ -50,9 +50,11 @@ class Admin {
       'settings' => array(
         'form_class' => 'c-form u-flex u-flex-sb js-form',
         'action' => '',
+        'enctype' => 'multipart/form-data',
+        'receiver' => '',
       ),
       'autoresponder' => array(
-        'enabled' => 'true',
+        'enabled' => 'false',
         'subject' => '',
         'content' => ''
       )

@@ -15,5 +15,9 @@ use Cuisine\Wrappers\Field;
   ) );
   ?>
   <p>Gebruik <code>|%AANHEF%|</code> om dhr/mevr te veranderen in heer/mevrouw</p>
+  <p>Gebruik <code>|%VOORNAAM%|</code> om de voornaam in te voegen</p>
   <p>Gebruik <code>|%ACHTERNAAM%|</code> om de achternaam in te voegen</p>
+  <p>Gebruik <code>|%DATUM%|</code> om de datum in te voegen</p>
+  <p>Gebruik <code>|%LOCATIE%|</code> om de locatie in te voegen</p>
+  <p>Gebruik <code>|%KEUZE%|</code> om de keuze in te voegen</p>
 </div>

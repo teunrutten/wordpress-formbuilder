@@ -12,5 +12,8 @@ use Cuisine\Wrappers\Field;
   Field::text( 'form[settings][enctype]', 'Form enctype', array(
     'defaultValue' => $content['settings']['enctype'] ?? ''
   ) )->render();
+  Field::text( 'form[settings][receiver]', 'Mailen naar:', array(
+    'defaultValue' => $content['settings']['receiver'] ?? ''
+  ) )->render();
   ?>
 </div>
