@@ -2,7 +2,6 @@
 jQuery(document).ready(function ($) {
   $('.js-add-form-tag').on('click', function () {
     const type = $(this).data('type')
-    console.log(type)
 
     if (type === 'col') { addToEditor('[col][/col]') }
     if (type === 'hidden') { addToEditor('[input_hidden name="" value=""]') }
@@ -17,7 +16,6 @@ jQuery(document).ready(function ($) {
     if (type === 'checkbox') { addToEditor('[checkbox name="" value="" label="" float="float" required="required" error=""]') }
     if (type === 'radio') { addToEditor('[radio name="" values="" labels="" float="float"]') }
     if (type === 'submit') { addToEditor('[submit style="primary js-loading-button" content="Verzenden" width="1/1"]') }
-    if (type === 'upload') { addToEditor('[file_upload name="" label="" placeholder="Upload uw bestand" width="1/1" required="required" error=""]') }
   })
 
   function getRegularInputShortcode (type) {

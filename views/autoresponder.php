@@ -2,6 +2,7 @@
 use Cuisine\Wrappers\Field;
 ?>
 <div class="inside nav-container hidden">
+  <br/>
   <?php
   Field::checkbox( 'form[autoresponder][enabled]', 'Ingeschakeld', array(
     'defaultValue' => $content['autoresponder']['enabled'] ?? 'false'

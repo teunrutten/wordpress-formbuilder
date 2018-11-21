@@ -2,6 +2,7 @@
 use Cuisine\Wrappers\Field;
 ?>
 <div class="inside nav-container hidden">
+  <br/>
   <?php
   Field::text( 'form[settings][form_class]', 'Form class', array(
     'defaultValue' => $content['settings']['form_class']
