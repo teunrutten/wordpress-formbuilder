@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Form Builder
  * Description: Build custom forms using shortcodes
- * Author: Corjen Moll
- * Version: 1.0.0
+ * Author: Bureau Bright
+ * Version: 2.0.0
  *
  * @package Wordpress
  * @subpackage FormBuilder

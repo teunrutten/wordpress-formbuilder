@@ -9,7 +9,6 @@
 
 namespace FormBuilder\Lib;
 use \Cuisine\Wrappers\PostType;
-// use \Cuisine\Wrappers\Metabox;
 
 class FormPostType {
 

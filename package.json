@@ -1,9 +1,9 @@
 {
   "name": "wordpress-formbuilder",
-  "version": "1.2.5",
+  "version": "2.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Corjen/wordpress-formbuilder",
-  "author": "Corjen Moll <corjen@me.com>",
+  "repository": "https://github.com/teunrutten/wordpress-formbuilder/",
+  "author": "Bureau Bright <info@bureaubright.nl>",
   "license": "MIT",
   "scripts": {
     "release": "standard-version && git push --follow-tags && git push && git push --tags"
