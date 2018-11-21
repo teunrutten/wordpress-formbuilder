@@ -100,23 +100,20 @@ class Shortcodes {
   /**
    * Radio
    */
-  public function radio ( $atts, $content ) {
+  public function radio ( $atts, $content ) {  
+    if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) return;
+
+    $values = explode( ',', $atts['values'] );
+    $labels = explode( ',', $atts['labels'] );
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
-    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group';
+    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group c-input__radio-group--'.count($values); 
 
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
     if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
       $html .= '<label class="c-input__label c-radio__group-label">' . $atts['label'] . '</label>';
     }
-
-    if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) {
-      return;
-    }
-
-    $values = explode( ',', $atts['values'] );
-    $labels = explode( ',', $atts['labels'] );
 
     foreach ( $values as $key => $value ) {
       $id = 'hash-' . uniqid() . '-' . $key;
@@ -148,13 +145,13 @@ class Shortcodes {
    * Returns a checkbox
    */
   public function checkbox ( $atts, $content ) {
+    if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
+
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
     $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__checkbox-group';
 
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
-
-    if ( ! isset( $atts['value'] ) || ! isset( $atts['label'] ) || ! isset( $atts['name'] )  ) return;
 
     $required  = '';
     if( isset( $atts['required'] ) ) {
@@ -264,7 +261,7 @@ class Shortcodes {
   }
 
   private function getOpeningInputContainer ( $size = false , $additionalClass = '' ) {
-    return '<div class="c-input ' . ( $size ? 'u-' . $size . '@m' : '' ) . ' ' . $additionalClass . '">';
+    return '<div class="c-input ' . ( $size ? $size : '' ) . ' ' . $additionalClass . '">';
   }
 
   private function getClosingInputContainer () {
