@@ -3,15 +3,15 @@ Wordpress formbuilder plugin
 
 A highly opionated formbuilder plugin using shortcodes.
 
-##Credits
+## Credits
 
 Forked from [Corjen](https://github.com/Corjen/wordpress-formbuilder/)
 
-##Installation
+## Installation
 
 Download, clone or add as a submodule
 
-##Available action hooks
+## Available action hooks
 
 `formbuilder_before_opening_form` Before opening `<form>` tag
 
