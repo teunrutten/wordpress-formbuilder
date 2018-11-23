@@ -3,6 +3,10 @@ Wordpress formbuilder plugin
 
 A highly opionated formbuilder plugin using shortcodes.
 
+##Credits
+
+Forked from [Corjen](https://github.com/Corjen/wordpress-formbuilder/)
+
 ##Installation
 
 Download, clone or add as a submodule
