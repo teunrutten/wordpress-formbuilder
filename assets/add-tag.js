@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
   })
 
   function getRegularInputShortcode (type) {
-    return '[input type="' + type + '" name="" label="" placeholder="" width="1/2" required="required" error=""]'
+    return '[input type="' + type + '" name="" label="" placeholder="" width="u-1/2@m" required="required" error=""]'
   }
 
   function addToEditor (content) {
