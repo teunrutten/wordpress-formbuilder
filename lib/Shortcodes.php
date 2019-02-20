@@ -85,7 +85,11 @@ class Shortcodes {
     }
 
     if ( isset( $atts['error'] ) ) { 
-      $html .= '<div class="c-input__error">' . $atts['error'] . '</div>'; 
+      $html .= '<div class="c-input__error">' . $atts['error'] . '</div>';
+    }
+
+    if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
+      $html .= $this->getInputValidationStatus();
     }
 
     $html .= '</div>'; // end .c-input__container
@@ -230,6 +234,10 @@ class Shortcodes {
       $html .= '<div class="c-input__error c-textarea__error">' . $atts['error'] . '</div>'; 
     }
 
+    if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
+      $html .= $this->getInputValidationStatus();
+    }
+
     $html .= $this->getClosingInputContainer();
     return $html;
   }
@@ -267,4 +275,13 @@ class Shortcodes {
   private function getClosingInputContainer () {
     return '</div>';
   }
+
+  private function getInputValidationStatus () {
+    return '
+    <div class="c-input__status">
+      <svg class="c-icon c-icon--small c-input__status-icon c-input__status-icon--success"><use xlink:href="#form-success"></use></svg>
+      <svg class="c-icon c-icon--small c-input__status-icon c-input__status-icon--error"><use xlink:href="#form-error"></use></svg>
+    </div>';
+  }
+
 }
