@@ -57,7 +57,7 @@ class Shortcodes {
     $html = '';
 
     if( $atts['type'] !== 'hidden' ) {
-      $html .= $this->getOpeningInputContainer( $width );
+      $html .= $this->getOpeningInputContainer( $width, 'c-input--default' );
     }
 
     if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
@@ -89,7 +89,7 @@ class Shortcodes {
     }
 
     if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
-      $html .= $this->getInputValidationStatus();
+      $html .= $this->getInputValidationStatus( 'c-input__status--default' );
     }
 
     $html .= '</div>'; // end .c-input__container
@@ -111,7 +111,7 @@ class Shortcodes {
     $labels = explode( ',', $atts['labels'] );
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
-    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__radio-group c-input__radio-group--'.count($values); 
+    $additionalClass = !isset( $atts['float'] ) ? 'c-input--radio' : 'c-input--radio c-input__radio-group c-input__radio-group--'.count($values); 
 
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
@@ -153,7 +153,7 @@ class Shortcodes {
 
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
     $float = isset( $atts['float'] );
-    $additionalClass = !isset( $atts['float'] ) ? '' : 'c-input__checkbox-group';
+    $additionalClass = !isset( $atts['float'] ) ? 'c-input--checkbox' : 'c-input--checkbox c-input__checkbox-group';
 
     $html = $this->getOpeningInputContainer( $width, $additionalClass );
 
@@ -174,7 +174,7 @@ class Shortcodes {
 
     $html .= '</div>';
 
-    $html .= $this->getClosingInputContainer();
+    $html .= $this->getClosingInputContainer( 'c-input__status--default' );
     return $html;
   }
 
@@ -184,11 +184,13 @@ class Shortcodes {
   public function select ( $atts, $content ) {
     if ( ! isset( $atts['values'] ) || ! isset( $atts['labels'] ) ) return;
 
-    $html = $this->getOpeningInputContainer( $atts['width'] ?? false );
+    $html = $this->getOpeningInputContainer( $atts['width'] ?? false, 'c-input--select' );
     $values = explode( ',', $atts['values'] );
     $labels = explode( ',', $atts['labels'] );
 
-    $html .= isset( $atts['label'] ) ? '<label class="c-select__label">' . $atts['label']  .'</label>' : '';
+    $html .= isset( $atts['label'] ) ? '<label class="c-input__label c-input__label--select">' . $atts['label']  .'</label>' : '';
+
+    $html .= '<div class="c-input__container c-input__container--select">';
 
     $html .= '<select class="c-select" name="' . $atts['name'] . '" ' . ( isset( $atts['required'] ) ? 'required': '' ) . '>';
     foreach ( $values as $key => $value ) {
@@ -205,8 +207,14 @@ class Shortcodes {
     $html .= '</select>';
 
     if ( isset( $atts['error'] ) ) { 
-      $html .= '<div class="c-select__error">' . $atts['error'] . '</div>'; 
+      $html .= '<div class="c-input__error c-input__error--select">' . $atts['error'] . '</div>'; 
     }
+
+    if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
+      $html .= $this->getInputValidationStatus( 'c-input__status--select' );
+    }
+
+    $html .= '</div>'; // end .c-input__container
 
     $html .= $this->getClosingInputContainer();
     return $html;
@@ -217,11 +225,13 @@ class Shortcodes {
    */
   public function textarea ( $atts, $content ) {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
-    $html = $this->getOpeningInputContainer( $width );
+    $html = $this->getOpeningInputContainer( $width, 'c-input--textarea' );
 
     if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
-      $html .= '<label class="c-input__label c-textarea__label">' . $atts['label'] . '</label>';
+      $html .= '<label class="c-input__label c-input__label--textarea">' . $atts['label'] . '</label>';
     }
+
+    $html .= '<div class="c-input__container c-input__container--textarea">';
 
     $html .= '<textarea class="c-input__input c-textarea" ';
     if ( isset( $atts['name'] ) ) { $html .= 'name="' . $atts['name'] . '" '; }
@@ -231,12 +241,14 @@ class Shortcodes {
     $html .= '></textarea>';
 
     if ( isset( $atts['error'] ) ) { 
-      $html .= '<div class="c-input__error c-textarea__error">' . $atts['error'] . '</div>'; 
+      $html .= '<div class="c-input__error c-input__error--textarea">' . $atts['error'] . '</div>'; 
     }
 
     if ( isset( $atts['required'] ) && $atts['required'] === 'required' ) {
-      $html .= $this->getInputValidationStatus();
+      $html .= $this->getInputValidationStatus( 'c-input__status--textarea' );
     }
+
+    $html .= '</div>'; // end .c-input__container
 
     $html .= $this->getClosingInputContainer();
     return $html;
@@ -253,7 +265,7 @@ class Shortcodes {
   public function submit ($atts, $content = '') {
     $width = isset( $atts['width'] ) ? $atts['width'] : false;
 
-    $html = $this->getOpeningInputContainer( $width );
+    $html = $this->getOpeningInputContainer( $width, 'c-input--submit' );
 
     $html .= Timber::compile( '/views/shared/loading-button.twig', array(
       'style' => $atts['style'] ?? '',
@@ -269,16 +281,19 @@ class Shortcodes {
   }
 
   private function getOpeningInputContainer ( $size = false , $additionalClass = '' ) {
-    return '<div class="c-input ' . ( $size ? $size : '' ) . ' ' . $additionalClass . '">';
+    $class = 'c-input';
+    if ($size) { $class .= ' ' . $size; }
+    if ($additionalClass) { $class .= ' ' . $additionalClass; }
+    return '<div class="' . $class . '">';
   }
 
   private function getClosingInputContainer () {
     return '</div>';
   }
 
-  private function getInputValidationStatus () {
+  private function getInputValidationStatus ( $additionalClass = '' ) {
     return '
-    <div class="c-input__status">
+    <div class="c-input__status '.$additionalClass.'">
       <svg class="c-icon c-icon--small c-input__status-icon c-input__status-icon--success"><use xlink:href="#form-success"></use></svg>
       <svg class="c-icon c-icon--small c-input__status-icon c-input__status-icon--error"><use xlink:href="#form-error"></use></svg>
     </div>';

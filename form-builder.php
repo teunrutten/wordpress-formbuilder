@@ -5,7 +5,7 @@
  * Description: Build custom forms using shortcodes
  * Author: Bureau Bright
  * Author URI: https://github.com/teunrutten/
- * Version: 2.0.0
+ * Version: 2.1.0
  *
  * @package Wordpress
  * @subpackage FormBuilder
