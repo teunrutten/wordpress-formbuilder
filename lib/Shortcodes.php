@@ -240,6 +240,10 @@ class Shortcodes {
     if ( isset( $atts['required'] ) ) { $html .= 'required '; }
     $html .= '></textarea>';
 
+    if ( isset( $atts['title'] ) && ! empty( $atts['title'] ) ) {
+      $html .= '<span class="c-input__title c-input__title--textarea">' . $atts['title'] . '</span>';
+    }
+
     if ( isset( $atts['error'] ) ) { 
       $html .= '<div class="c-input__error c-input__error--textarea">' . $atts['error'] . '</div>'; 
     }
