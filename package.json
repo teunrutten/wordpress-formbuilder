@@ -1,14 +1,10 @@
 {
   "name": "wordpress-formbuilder",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "index.js",
   "repository": "https://github.com/teunrutten/wordpress-formbuilder/",
   "author": "Bureau Bright <info@bureaubright.nl>",
   "license": "MIT",
-  "scripts": {
-    "release": "standard-version && git push --follow-tags && git push && git push --tags"
-  },
-  "dependencies": {
-    "standard-version": "^4.0.0"
-  }
+  "scripts": {},
+  "dependencies": {}
 }
